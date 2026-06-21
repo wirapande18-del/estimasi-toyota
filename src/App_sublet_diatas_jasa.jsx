@@ -628,14 +628,14 @@ function PDFView({refx,form,totals}){
 
     <table className="pdfCellTable" style={styles.pdfTableNew}>
       <colgroup><col style={{width:"8%"}}/><col style={{width:"40%"}}/><col style={{width:"16%"}}/><col style={{width:"18%"}}/><col style={{width:"18%"}}/></colgroup>
-      <thead><tr><th>No.</th><th>Jasa Pekerjaan</th><th>Rate</th><th>Price</th><th>Total</th></tr></thead>
-      <tbody>{jasaChargeable.length ? jasaChargeable.map((r,i)=><tr key={r.id||i}><td>{i+1}</td><td className="left">{r.jasaName}</td><td>{r.rate}</td><td>Rp {rupiah(r.price)}</td><td>Rp {rupiah(r.total)}</td></tr>) : <tr><td colSpan="5">-</td></tr>}</tbody>
+      <thead><tr><th>No.</th><th>Sublet</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
+      <tbody>{subletsChargeable.length ? subletsChargeable.map((r,i)=><tr key={r.id||i}><td>{i+1}</td><td className="left">{r.subletName}</td><td>{r.qty}</td><td>Rp {rupiah(r.price)}</td><td>Rp {rupiah(r.total)}</td></tr>) : <tr><td colSpan="5">-</td></tr>}</tbody>
     </table>
 
     <table className="pdfCellTable" style={styles.pdfTableNew}>
       <colgroup><col style={{width:"8%"}}/><col style={{width:"40%"}}/><col style={{width:"16%"}}/><col style={{width:"18%"}}/><col style={{width:"18%"}}/></colgroup>
-      <thead><tr><th>No.</th><th>Sublet</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
-      <tbody>{subletsChargeable.length ? subletsChargeable.map((r,i)=><tr key={r.id||i}><td>{i+1}</td><td className="left">{r.subletName}</td><td>{r.qty}</td><td>Rp {rupiah(r.price)}</td><td>Rp {rupiah(r.total)}</td></tr>) : <tr><td colSpan="5">-</td></tr>}</tbody>
+      <thead><tr><th>No.</th><th>Jasa Pekerjaan</th><th>Rate</th><th>Price</th><th>Total</th></tr></thead>
+      <tbody>{jasaChargeable.length ? jasaChargeable.map((r,i)=><tr key={r.id||i}><td>{i+1}</td><td className="left">{r.jasaName}</td><td>{r.rate}</td><td>Rp {rupiah(r.price)}</td><td>Rp {rupiah(r.total)}</td></tr>) : <tr><td colSpan="5">-</td></tr>}</tbody>
     </table>
 
     <div style={styles.pdfTotalRow}>
@@ -645,6 +645,8 @@ function PDFView({refx,form,totals}){
     </div>
     <div style={styles.pdfGrand}>Grand Total&nbsp;&nbsp;:&nbsp;&nbsp; Rp {rupiah(totals.grandTotal)}</div>
 
+    <div style={styles.pdfBlankColumn}></div>
+
     <div style={styles.pdfBottom}>
       <div style={styles.pdfNote}>
         <b>Keterangan:</b><br/>
@@ -653,10 +655,11 @@ function PDFView({refx,form,totals}){
       </div>
       <div style={styles.pdfSignBox}>Disiapkan Oleh,<br/><br/><br/><b>{form.staff}</b><br/><small>{form.jabatan || "Service Advisor"}</small></div>
       <div style={styles.pdfSignBox}>Disetujui Oleh,<br/><br/><br/><b>{form.kepalaBengkel}</b><br/><small>(Kepala Bengkel)</small></div>
-<div style={styles.pdfSignBox}>Pelanggan,<br/><br/><br/><b>{form.customer || "-"}</b></div>
-</div>
+      <div style={styles.pdfSignBox}>Pelanggan,<br/><br/><br/><b>{form.customer || "-"}</b></div>
+    </div>
     <p style={styles.pdfThanks}>Terima kasih atas kepercayaan Anda kepada Agung Toyota Gianyar.</p>
   </div>
+}
 function PdfInfo({label,value}){return <div style={styles.pdfInfoRow}><b>{label}</b><span>:</span><span>{value || ""}</span></div>}
 function PdfTable({rows,cols}){return <table style={styles.pdfTable}><thead><tr><th>No</th>{cols.map(c=><th key={c}>{c}</th>)}</tr></thead><tbody>{rows.length?rows.map((r,i)=><tr key={r.id||i}><td>{i+1}</td>{cols.map(c=><td key={c}>{["price","total"].includes(c)?"Rp "+rupiah(r[c]):r[c]}</td>)}</tr>):<tr><td colSpan={cols.length+1}>-</td></tr>}</tbody></table>}
 const styles={app:{display:"flex",minHeight:"100vh",background:"#f0f0f0",fontFamily:"Arial"},sidebar:{width:260,padding:14,background:"white",borderRight:"1px solid #ccc"},logo:{color:"red",border:"1px solid #408cff",borderRadius:8,fontSize:30,fontWeight:"bold",width:55,padding:8},nav:{padding:12,borderBottom:"1px solid #eee"},navActive:{padding:12,background:"#eef1f5",fontWeight:"bold"},menu:{display:"block",width:"100%",padding:12,background:"white",border:"none",textAlign:"left",cursor:"pointer"},menuOn:{display:"block",width:"100%",padding:12,background:"#0b449d",color:"white",borderRadius:6,textAlign:"left"},main:{flex:1,padding:20},card:{background:"white",border:"1px solid #aaa",borderRadius:8,padding:18,marginBottom:18},tabs:{display:"grid",gridTemplateColumns:"1fr 1fr",textAlign:"center",background:"#ddd",borderRadius:6,overflow:"hidden",marginBottom:15},grid4:{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16},grid3:{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16},grid2:{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16},label:{fontSize:13,fontWeight:"bold"},input:{width:"100%",padding:10,border:"1px solid #bbb",borderRadius:5,marginTop:6,boxSizing:"border-box"},suggestBox:{position:"absolute",left:0,right:0,top:"100%",background:"white",border:"1px solid #999",borderRadius:6,maxHeight:260,overflowY:"auto",zIndex:99999,boxShadow:"0 8px 18px rgba(0,0,0,.18)",textAlign:"left"},suggestItem:{padding:"10px 12px",borderBottom:"1px solid #eee",fontSize:13,cursor:"pointer",background:"white"},cellInput:{width:"100%",padding:8,border:"1px solid #bbb",borderRadius:5,boxSizing:"border-box"},smallInput:{width:70,padding:8,textAlign:"center",border:"1px solid #bbb",borderRadius:5},table:{width:"100%",borderCollapse:"collapse",marginTop:8},btn:{padding:"9px 14px",border:"1px solid #999",borderRadius:5,background:"white",cursor:"pointer",margin:5},green:{padding:"10px 16px",border:"none",borderRadius:5,background:"#16a34a",color:"white",cursor:"pointer",margin:5},greenRight:{float:"right",padding:"12px 20px",border:"none",borderRadius:6,background:"#16a34a",color:"white",fontWeight:"bold"},blue:{padding:"10px 16px",border:"none",borderRadius:5,background:"#0b45c5",color:"white",cursor:"pointer",margin:5},red:{padding:"10px 16px",border:"none",borderRadius:5,background:"#ef4444",color:"white",cursor:"pointer",margin:5},del:{padding:"7px 10px",border:"none",background:"transparent",color:"red",cursor:"pointer"},discount:{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:12,alignItems:"end",marginTop:20},actions:{display:"flex",justifyContent:"flex-end",gap:8,marginTop:15},pdf:{width:900,background:"white",padding:40,margin:"30px auto",textAlign:"center"},pdfGrid:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:30,textAlign:"left"},pdfTable:{width:"100%",borderCollapse:"collapse",margin:"10px 0 25px"},sign:{display:"flex",justifyContent:"space-between",marginTop:60},flatRateBox:{display:"grid",gridTemplateColumns:"100px 80px 1fr 80px 140px",gap:10,alignItems:"center",background:"#fffbe6",border:"1px solid #d6c67a",borderRadius:7,padding:10,marginBottom:12},select:{width:"100%",padding:9,border:"1px solid #bbb",borderRadius:5,background:"white"},flatRateInput:{padding:9,border:"1px solid #bbb",borderRadius:5,background:"#eee",textAlign:"right",fontWeight:"bold"},totalBox:{gridColumn:"span 1",textAlign:"right",lineHeight:1.2},bulkBox:{width:"100%",minHeight:110,padding:10,border:"1px solid #aaa",borderRadius:6,boxSizing:"border-box",fontFamily:"Consolas, monospace",marginBottom:10},
@@ -676,6 +679,7 @@ pdfTotalRow:{display:"grid",gridTemplateColumns:"1fr",gap:4,borderTop:"2px solid
 pdfTotalLine:{display:"grid",gridTemplateColumns:"1fr 10px 110px",gap:4,alignItems:"center"},
 pdfGrand:{textAlign:"right",fontWeight:"900",fontSize:18,marginTop:10},
 pdfDate:{textAlign:"right",fontSize:11,margin:"12px 0"},
+pdfBlankColumn:{border:"1px solid #333",height:32,marginTop:12,marginBottom:6},
 pdfBottom:{display:"grid",gridTemplateColumns:"1.55fr 1fr 1fr 1fr",gap:6,marginTop:12},
 pdfNote:{border:"1px solid #333",padding:9,textAlign:"left",fontSize:10,lineHeight:1.25,minHeight:86},
 pdfSignBox:{border:"1px solid #333",padding:9,textAlign:"center",fontSize:11,minHeight:86},
