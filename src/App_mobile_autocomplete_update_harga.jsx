@@ -594,7 +594,7 @@ function PDFView({refx,form,totals}){
       <div>
         <h1 style={styles.pdfBranch}>PT. AGUNG AUTOMALL GIANYAR</h1>
         <p style={styles.pdfInfo}>JL. BYPASS DHARMA GIRI, BURUAN, BLAHBATUH, GIANYAR</p>
-        <p style={styles.pdfInfo}>TLP : 0361-928888</p>
+        <p style={styles.pdfInfo}>TLP : 0361-948888</p>
       </div>
       <div style={styles.pdfLogo}>
         <img src="/logo-agung-toyota.png" alt="Agung Toyota" style={styles.pdfLogoImg} />
