@@ -653,8 +653,11 @@ function PDFView({refx,form,totals}){
       </div>
       <div style={styles.pdfSignBox}>Disiapkan Oleh,<br/><br/><br/><b>{form.staff}</b><br/><small>{form.jabatan || "Service Advisor"}</small></div>
       <div style={styles.pdfSignBox}>Disetujui Oleh,<br/><br/><br/><b>{form.kepalaBengkel}</b><br/><small>(Kepala Bengkel)</small></div>
-      <div style={styles.pdfSignBox}>Pelanggan,<br/><br/><br/><b>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</b></div>
-    </div>
+      <div style={styles.pdfSignBox}>
+  Pelanggan,
+  <br/><br/><br/>
+  <b>({form.customer || "...................."})</b>
+</div>
 
     <p style={styles.pdfThanks}>Terima kasih atas kepercayaan Anda kepada Agung Toyota Gianyar.</p>
   </div>
